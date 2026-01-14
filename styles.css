@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+
+
+
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 12px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background-color: #f7f3e8; /* parchment */
+  color: #2b2b2b;
+}
+
+/* ===== Header ===== */
+h1 {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+/* ===== Search Input ===== */
+#q {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 17px;
+  border-radius: 10px;
+  border: 1px solid #bbb;
+  margin-bottom: 10px;
+}
+
+/* ===== Results List ===== */
+#results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===== Result Card ===== */
+.result {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 4px;
+}
+
+/* ===== Inner Card ===== */
+.card {
+  flex: 1;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+/* ===== Text ===== */
+.card a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #2a5c4f;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  font-size: 13px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* ===== Rarity Badge ===== */
+.badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  text-transform: capitalize;
+  border: 1px solid #999;
+}
+
+.badge.common { border-color: #999; }
+.badge.rare { border-color: #2b6; }
+.badge.epic { border-color: #66f; }
+.badge.legendary { border-color: #c93; }
+
+/* ===== Style Variants ===== */
+
+/* Scratched danger text */
+.result.danger .card a {
+  font-family: "Creepster", system-ui, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Fancy / upscale locations */
+.result.fancy .card {
+  background: linear-gradient(#ffffff, #f2f2f2);
+  border: 1px solid #c8c8c8;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.result.fancy .card a {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.3px;
+  color: #3a3a3a;
+}
+
+.result.fancy .meta {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* ===== No Results ===== */
+.no-results {
+  padding: 14px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ===== Fog of War ===== */
+.result.fog .card {
+  filter: blur(3px);
+  opacity: 0.6;
+}
+
+.result.fog .card a {
+  pointer-events: auto; /* still clickable */
+  cursor: not-allowed;
+}
+
+.result.fog .meta {
+  font-style: italic;
+}

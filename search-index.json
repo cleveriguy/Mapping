@@ -1,0 +1,44 @@
+[
+  {
+    "href": "home.html",
+    "title": "fancy home",
+    "description": "must be rich",
+    "keywords": ["test", "fancy"],
+    "text": "home landing welcome",
+    "style": "fancy"
+  },
+  {
+    "href": "ruins.html",
+    "title": "Ancient Ruins",
+    "description": "Forbidden",
+    "keywords": ["test", "hidden"],
+    "style": "danger",
+    "fog": "true"
+  },
+  {
+    "href": "danger.html",
+    "title": "danger",
+    "description": "DO NOT ENTER",
+    "keywords": ["test", "danger"],
+    "text": "RUN FOR YOUR LIFE",
+    "style": "danger"
+  },
+  {
+  "_comment": "no more test stuff"
+  },
+  {
+    "href": "places/eidolon.html",
+    "title": "eidolon",
+    "description": "a brand new world to explore",
+    "keywords": ["start", "home base"],
+    "text": "the expansive world of eidolon"
+  },
+  {
+    "href": "places/eidolon-places/nanim.html",
+    "title": "nanim",
+    "description": "a busy city full of activity",
+    "keywords": ["start", "home base"],
+    "text": "the grand city of eidolon"
+  }
+
+]

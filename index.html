@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Map</h1>
+
+<section id="intro">
+  <p>find locations</p>
+</section>
+
+<section id="search">
+  <input id="q" placeholder="Search locations…" autocomplete="off">
+  <ul id="results"></ul>
+</section>
+
+<script>
+let pages = [];
+const qEl = document.getElementById("q");
+const out = document.getElementById("results");
+
+out.innerHTML = "<li class='meta'>Loading…</li>";
+
+fetch("search-index.json")
+  .then(r => {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  })
+  .then(data => {
+    pages = data;
+    out.innerHTML = "<li class='meta'>Type to search…</li>";
+  })
+  .catch(err => {
+    console.error(err);
+    out.innerHTML = "<li class='no-results'>Failed to load search data.</li>";
+  });
+
+const norm = s => (s || "").toLowerCase();
+
+function search() {
+  const q = norm(qEl.value).trim();
+  out.innerHTML = "";
+  if (!q) {
+    out.innerHTML = "<li class='meta'>Type to search…</li>";
+    return;
+  }
+
+  const matches = pages.filter(p =>
+    norm(p.title).includes(q) ||
+    norm(p.description).includes(q) ||
+    norm(p.text).includes(q) ||
+    (p.keywords || []).some(k => norm(k).includes(q))
+  );
+
+  if (matches.length === 0) {
+    out.innerHTML = "<li class='no-results'>No results found.</li>";
+    return;
+  }
+
+  matches.forEach(p => {
+    const fog = p.fog ? "fog" : "";
+    const title = p.fog ? "???" : p.title;
+    const desc  = p.fog ? "Unexplored location" : (p.description || "");
+    const link  = p.fog ? "fog.html" : p.href;
+
+    out.innerHTML += `
+      <li class="result ${p.style || ""} ${fog}">
+        <div class="card">
+          <a href="${link}">${title}</a>
+          <div class="meta">${desc}</div>
+        </div>
+      </li>
+    `;
+  });
+}
+
+qEl.addEventListener("input", search);
+</script>
+
+</body>
+</html>
