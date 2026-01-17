@@ -1,0 +1,37 @@
+[
+  {
+    "href": "places/eidolon.html",
+    "title": "eidolon",
+    "description": "a brand new world to explore",
+    "keywords": ["start", "home base"],
+    "text": "the expansive world of eidolon"
+  },
+  {
+    "href": "places/eidolon-places/nanim.html",
+    "title": "nanim",
+    "description": "a busy city full of activity",
+    "keywords": ["start", "home base"],
+    "text": "the grand city of eidolon"
+  },
+  {
+    "href": "places/eidolon-places/dock.html",
+    "title": "fracture docks",
+    "description": "a place to travel across the fracture",
+    "keywords": ["fracture", "dock"]
+  },
+  {
+    "href": "places/eidolon-places/mistwood.html",
+    "title": "mistwood",
+    "description": "placeholder text",
+    "keywords": ["forest", "tree"],
+    "fog": "true"
+  },
+  {
+    "href": "places/eidolon-places/shiza.html",
+    "title": "shiza mountains",
+    "description": "a mountain range",
+    "keywords": ["mountain"],
+    "fog": "true"
+  }
+
+]

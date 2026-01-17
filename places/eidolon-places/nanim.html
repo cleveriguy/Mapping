@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nanim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Shared site styles -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    body.map-nanim .map-stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f7f3e8; /* match site background */
+    }
+
+    body.map-nanim .map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f3e8; /* fallback color behind image */
+    }
+
+    body.map-nanim .map {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body.map-nanim .map-img {
+      position: static;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      z-index: 1;
+    }
+
+    body.map-nanim .poi {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #aaa;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    body.map-nanim .back-btn {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    background-color: #f7f3e8; /* Matches parchment */
+    color: #2b2b2b;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 1000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease;
+    }
+
+    body.map-nanim .back-btn:hover {
+    background-color: #ece5d5;
+    }
+    body.map-nanim .poi.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #d13c3c;
+  border-radius: 50%;
+  padding: 0;
+  border: 2px solid white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  text-indent: -9999px; /* visually hides any text */
+}
+
+body.map-nanim .poi.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffffcc;
+  color: #2b2b2b;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+body.map-nanim .poi.dot:hover::after {
+  opacity: 1;
+}
+  </style>
+</head>
+<body class="map-nanim">
+
+  <!-- Map -->
+  <div class="map-stage">
+    <div class="map">
+      <img class="map-img" src="../eidolon-pics/Nanim.jpg" alt="Nanim map">
+
+      <!-- 🔽 POIs go here -->
+      <!-- Example:
+      <a class="poi" href="location.html" style="left:60%; top:40%;">Cool Place</a>
+      -->
+      <a class="poi dot"
+   href="location.html"
+   style="left:60%; top:40%;"
+   data-label="Cool Place">hi</a>
+    </div>
+  </div>
+
+  <!-- Back button -->
+  <a class="back-btn" href="../eidolon.html">← Back</a>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Search Index Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    input, select { width: 100%; padding: 10px; font-size: 16px; margin-top: 8px; }
+    ul { list-style: none; padding: 0; margin-top: 12px; }
+    li { padding: 8px 0; border-bottom: 1px solid #ddd; }
+    .meta { font-size: 12px; opacity: .7; }
+    .flag { font-size: 12px; padding: 2px 6px; border: 1px solid #aaa; border-radius: 6px; margin-left: 6px; }
+  </style>
+</head>
+<body>
+
+<h1>Search Index Test</h1>
+
+<input id="q" placeholder="Search anything…">
+
+<select id="sort">
+  <option value="az">Title A–Z</option>
+  <option value="za">Title Z–A</option>
+  <option value="href">Filename (href)</option>
+  <option value="style">Style</option>
+  <option value="fog">Fog first</option>
+</select>
+
+<ul id="results"></ul>
+
+<script>
+let pages = [];
+const qEl = document.getElementById("q");
+const sortEl = document.getElementById("sort");
+const out = document.getElementById("results");
+
+const norm = v => String(v ?? "").toLowerCase();
+
+fetch("search-index.json")
+  .then(r => r.json())
+  .then(data => {
+    pages = data.filter(p => p.href);
+    update();
+  })
+  .catch(() => out.innerHTML = "<li>Error loading search-index.json</li>");
+
+function matchesAllFields(p, q) {
+  return [
+    p.href,
+    p.title,
+    p.description,
+    p.text,
+    p.style,
+    p.fog,
+    ...(p.keywords || [])
+  ].some(v => norm(v).includes(q));
+}
+
+function sortPages(list) {
+  const mode = sortEl.value;
+  return [...list].sort((a,b) => {
+    switch (mode) {
+      case "za":
+        return norm(b.title).localeCompare(norm(a.title));
+      case "href":
+        return norm(a.href).localeCompare(norm(b.href));
+      case "style":
+        return norm(a.style).localeCompare(norm(b.style));
+      case "fog":
+        return (b.fog === true) - (a.fog === true);
+      default:
+        return norm(a.title).localeCompare(norm(b.title));
+    }
+  });
+}
+
+function render(list) {
+  out.innerHTML = "";
+  list.forEach(p => {
+    out.innerHTML += `
+      <li>
+        <strong>${p.title || "(no title)"}</strong>
+        <span class="meta">(${p.href})</span>
+        ${p.style ? `<span class="flag">${p.style}</span>` : ""}
+        ${p.fog ? `<span class="flag">fog</span>` : ""}
+        <div class="meta">${p.description || ""}</div>
+      </li>
+    `;
+  });
+}
+
+function update() {
+  const q = norm(qEl.value).trim();
+  let list = pages;
+  if (q) list = list.filter(p => matchesAllFields(p, q));
+  list = sortPages(list);
+  render(list);
+}
+
+qEl.addEventListener("input", update);
+sortEl.addEventListener("change", update);
+</script>
+
+</body>
+</html>
